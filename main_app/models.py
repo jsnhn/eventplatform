@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,8 +13,8 @@ GROUPS = (
 )
 
 class Event(models.Model):
-    name = models.CharField(max_length=100, default='Default Event Name')
-    short_summary = models.CharField(max_length=100, default='Default Summary')
+    name = models.CharField(max_length=100)
+    short_summary = models.CharField(max_length=100)
     category = models.CharField(
         max_length=1,
         choices=GROUPS,
@@ -24,6 +25,7 @@ class Event(models.Model):
     location = models.CharField(max_length=100)
     about = models.CharField(max_length=200)
     age_restriction = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__ (self):
         return self.name

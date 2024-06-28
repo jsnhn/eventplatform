@@ -7,8 +7,13 @@
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ event.name }}</span>
-      <p>summary: {{ event.short_summary }}</p>
-      <p>date: {{ event.date }}</p>
+      <p>Summary: {{ event.short_summary }}</p>
+      <p>Date: {{ event.date }}</p>
+      <p>Category: {{ event.category }}</p> <!--TODO fix this to say Music-->
+      <p>Time: {{ event.time }}</p>
+      <p>Location: {{ event.location }}</p>
+      <p>About: {{ event.about }}</p>
+      <p>Age: {{ event.age_restriction }}</p>
     </div>
   </div>
 {% endfor %}

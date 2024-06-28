@@ -17,7 +17,7 @@ def events_index(request):
     })
 
 def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
-    event = Event.object.get(id=event_id)
+    event = Event.objects.get(id=event_id)
     return render(request, 'events/detail.html', {
         'event': event
     })

@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 GROUPS = (
     ('M', 'Music'),
     ('F', 'Food & Drink'),
@@ -11,8 +12,8 @@ GROUPS = (
 )
 
 class Event(models.Model):
-    name = models.CharField(max_length=100),
-    short_summary = models.CharField(max_length=100),
+    name = models.CharField(max_length=100, default='Default Event Name')
+    short_summary = models.CharField(max_length=100, default='Default Summary')
     category = models.CharField(
         max_length=1,
         choices=GROUPS,

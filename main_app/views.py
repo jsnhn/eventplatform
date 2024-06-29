@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Event
 
 # Create your views here.
@@ -17,13 +18,18 @@ class AboutView(TemplateView):
 #         'events': events
 #     })
 
-class EventListView(ListView):
+class EventList(ListView):
     model = Event
-    template_name = 'events/index.html'
-    context_object_name = 'events'
+    template_name = 'events/index.html' #file location
+    context_object_name = 'events' # specify the name of the context variable that will be used in the template
 
-def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
-    event = Event.objects.get(id=event_id)
-    return render(request, 'events/detail.html', {
-        'event': event
-    })
+# def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
+#     event = Event.objects.get(id=event_id) #DetailView automatically retrieves the object based on the primary key provided in the URL pattern. It uses the pk field by default, which should match the primary key of the model. you would need the code on the left if the path was 'events/<int:event_id>/'
+#     return render(request, 'events/detail.html', {
+#         'event': event
+#     })
+
+class EventDetail(DetailView):
+    model = Event
+    template_name = 'events/detail.html'
+    context_object_name = 'event' #single instance of an object

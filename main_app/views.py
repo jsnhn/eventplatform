@@ -1,6 +1,7 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Event
 
 # Create your views here.
@@ -33,3 +34,11 @@ class EventDetail(DetailView):
     model = Event
     template_name = 'events/detail.html'
     context_object_name = 'event' #single instance of an object
+
+class EventCreate(LoginRequiredMixin, CreateView):
+    model = Event
+    fields = ['name', 'short_summary','category', 'date', 'time', 'location', 'about', 'age_restriction']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

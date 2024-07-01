@@ -13,6 +13,8 @@ body {
     text-align: right;
   }
 
+
+/* 
   .submit-link {
     background-color: transparent;
     border: none;
@@ -23,4 +25,4 @@ body {
   button.submit-link:focus {
     background-color: transparent;
     outline: none;
-  }
+  } */

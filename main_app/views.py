@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Event
@@ -42,3 +42,11 @@ class EventCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+class EventUpdate(UpdateView):
+    model = Event
+    fields = ['name', 'short_summary','category', 'date', 'time', 'location', 'about', 'age_restriction']
+
+class EventDelete(DeleteView):
+    model = Event
+    success_url = '/events'

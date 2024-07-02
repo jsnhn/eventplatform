@@ -14,6 +14,10 @@
         <p>About: {{ event.about }}</p>
         <p>Age: {{ event.age_restriction }}</p>
     </div>
+    <div>
+        <a href="{% url 'events_update' event.id %}">Edit</a>
+        <a href="{% url 'events_delete' event.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}

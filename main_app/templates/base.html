@@ -12,26 +12,22 @@
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper">
-        
-        <a href="/" class="left brand-logo">Event Platform</a>
-        
-        <a href="{% url 'about' %}">About</a>
+      <ul>
+        <li class="nav-logo"><a href="/">Event Platform</a></li>
+        <li><a href="{% url 'about' %}" class="active">About</a></li>
           {% if user.is_authenticated %}
-          <a href="{% url 'events_create' %}">Add Event</a>
-          <a href="{% url 'index' %}">My Events</a>
-          
-              <a href="#">
-                <form action="{% url 'logout' %}" method="post">
+          <li><a href="{% url 'events_create' %}">Add Event</a></li>
+            <li><a href="{% url 'index' %}">My Events</a></li>
+              <li>
+                <form action="{% url 'logout' %}" method="post" class="inline-form">
                   {% csrf_token %}
-                  <button type="submit" class="submit-link">Log Out</button>
+                  <button type="submit">Log Out</button>
                 </form>
-              </a>
-            
+              </li>
             {% else %}
-            <a href="{% url 'login' %}">Log In</a>
+            <li><a href="{% url 'login' %}">Log In</a></li>
             {% endif %}
-      </div>
+        </ul>
     </nav>
   </header>
   <main class="container">

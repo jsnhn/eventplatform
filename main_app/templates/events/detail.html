@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Event Details</h1>
+<div class="vert-nav">
+    <ul class="vert-ul">
+        {% if user.is_authenticated %}
+        <li class="vert-li"><a href="{% url 'events_create' %}">Add Event</a></li>
+        <li class="vert-li"><a href="{% url 'index' %}">My Events</a></li>
+        <li class="vert-li"><a href="">My Tickets</a></li>
+        {% endif %}
+    </ul>
 
-<div>
-    <div>
-        <span>{{ event.name }}</span>
-        <p>Summary: {{ event.short_summary }}</p>
-        <p>Date: {{ event.date }}</p>
-        <p>Category: {{ event.get_category_display }}</p> 
-        <p>Time: {{ event.time }}</p>
-        <p>Location: {{ event.location }}</p>
-        <p>About: {{ event.about }}</p>
-        <p>Age: {{ event.age_restriction }}</p>
-    </div>
-    <div>
-        <a href="{% url 'events_update' event.id %}">Edit</a>
-        <a href="{% url 'events_delete' event.id %}">Delete</a>
+    <div class="content-area">
+        <h1>{{ event.name }}</h1>
+        <p class="p-detail">Summary: {{ event.short_summary }}</p>
+        <div>
+            <h3>Date and Time:</h3>
+            <p>{{ event.date }} - {{ event.time }}</p>
+            <h3>Location:</h3>
+            <p>{{ event.location }}</p>
+            <h3>About the Event:</h3>
+            <p>{{ event.about }}</p>
+            <p>Category: {{ event.get_category_display }}</p> 
+            <p>Age: {{ event.age_restriction }}</p>
+        </div>
+        <div>
+            <a href="{% url 'events_update' event.id %}">Edit</a>
+            <a href="{% url 'events_delete' event.id %}">Delete</a>
+        </div>
     </div>
 </div>
-
 {% endblock %}

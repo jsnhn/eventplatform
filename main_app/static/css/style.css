@@ -57,3 +57,32 @@ li a {
 li a:hover, .inline-form button:hover {
   background-color: #111;
 }
+
+.index-card {
+  background-color: rgba(91, 168, 164, 0.4);
+  width: 1000px;
+  border: 5px solid rgba(26, 36, 41);
+  padding: 50px;
+  margin: 20px;
+}
+
+.index-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-card:hover {
+  background-color: rgba(91, 168, 164, 0.6);
+  border-color: rgba(26, 36, 41, 0.8);
+}
+
+.index-info {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.index-name {
+  font-size: larger;
+  color: #4CAF50;
+}

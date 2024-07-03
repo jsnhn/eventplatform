@@ -1,28 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Events</h1>
+<div class="vert-nav">
+  <ul class="vert-ul">
+    {% if user.is_authenticated %}
+    <li class="vert-li"><a href="{% url 'events_create' %}">Add Event</a></li>
+    <li class="vert-li"><a href="{% url 'index' %}">My Events</a></li>
+    <li class="vert-li"><a href="">My Tickets</a></li>
+    {% endif %}
+  </ul>
 
-<form method="GET">
-  <label for="filter">Filter Events:</label>
-  <select name="filter" id="filter">
-    <option value="all" >All Events</option>
-    <option value="created" >Created Events</option>
-    <option value="attending">Attending Events</option>
-  </select>
-</form>
+  <div class="content-area">
+    <h1>Events</h1>
+    <form method="GET">
+      <label for="filter">Filter Events:</label>
+      <select name="filter" id="filter">
+        <option value="all">All Events</option>
+        <option value="created">Created Events</option>
+        <option value="attending">Attending Events</option>
+      </select>
+    </form>
 
-
-{% for event in events %}
-  <div class="index-card">
-    <a href="{% url 'detail' event.id %}">
-      <div class="index-info">
-        <span class="index-name">{{ event.name }}</span>
-        <span>Summary: {{ event.short_summary }}</span>
-        <span>Date: {{ event.date }}</span>
+    {% for event in events %}
+      <div class="index-card">
+        <a href="{% url 'detail' event.id %}">
+          <div class="index-info">
+            <span class="index-name">{{ event.name }}</span>
+            <span>Summary: {{ event.short_summary }}</span>
+            <span>Date: {{ event.date }}</span>
+          </div>
+        </a>
       </div>
-    </a>
+    {% endfor %}
   </div>
-{% endfor %}
-
+</div>
 {% endblock %}

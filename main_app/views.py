@@ -1,9 +1,11 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from .models import Event
 import os
 
@@ -28,6 +30,14 @@ class EventList(LoginRequiredMixin, ListView):
     context_object_name = 'events' # specify the name of the context variable that will be used in the template
     #TODO how to to display just the logged in user's events?
 
+    def get_queryset(self):
+        filter = self.request.GET.get('filter', None)
+        print(filter)
+        # if filter = created events, return all the events the user created
+        # if filter = attending, return all the events the user is attending
+        # else if there is no filter, return all the events.
+        return Event.objects.all()
+
 # def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
 #     event = Event.objects.get(id=event_id) #DetailView automatically retrieves the object based on the primary key provided in the URL pattern. It uses the pk field by default, which should match the primary key of the model. you would need the code on the left if the path was 'events/<int:event_id>/'
 #     return render(request, 'events/detail.html', {
@@ -47,7 +57,10 @@ class EventCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        self.object = form.save() 
+        print(self.request.FILES)
+        # this is where you will create a new photo and associated with the event. end at photo.objects
+        return HttpResponseRedirect(self.get_success_url())
     
 class EventUpdate(LoginRequiredMixin, UpdateView):
     model = Event

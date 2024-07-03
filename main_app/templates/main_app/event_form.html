@@ -2,17 +2,32 @@
 {% block content %}
 
 {% if event %}
-        <h1>Edit <span>{{event.name}}</span></h1>
-    {% else %}
+    <h1>Edit <span>{{event.name}}</span></h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit!" class="btn">
+    </form>
+{% else %}
     <h1>Add Event</h1>
-    {% endif %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <th>
+                    <label for="id_photo">Upload Photo</label>
+                </th>
+                <td>
+                    <input type="file" name="photo-file">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit!" class="btn">
+    </form>
+{% endif %}
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-</form>
 
 {% endblock %}

@@ -12,14 +12,17 @@
 
   <div class="content-area">
     <h1>Events</h1>
-    <form method="GET">
+    <!-- <form method="GET">
       <label for="filter">Filter Events:</label>
       <select name="filter" id="filter">
         <option value="all">All Events</option>
         <option value="created">Created Events</option>
         <option value="attending">Attending Events</option>
       </select>
-    </form>
+    </form> -->
+    <a href="{% url 'index' %}">All Events</a>
+    <a href="{% url 'index' %}?filter=created">Created Events</a>
+    <a href="{% url 'index' %}?filter=attending">Attending Events</a>
 
     {% for event in events %}
       <div class="index-card">

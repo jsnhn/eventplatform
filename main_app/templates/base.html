@@ -10,9 +10,9 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-  <header class="navbar-fixed">
+  <header>
     <nav>
-      <ul>
+      <ul class="nav-ul">
         <li class="nav-logo"><a href="/">Event Platform</a></li>
         <li><a href="{% url 'about' %}" class="active">About</a></li>
           {% if user.is_authenticated %}

@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Event
 
@@ -18,11 +21,12 @@ class AboutView(TemplateView):
 #     return render(request, 'events/index.html', {
 #         'events': events
 #     })
-
+@login_required
 class EventList(ListView):
     model = Event
     template_name = 'events/index.html' #file location
     context_object_name = 'events' # specify the name of the context variable that will be used in the template
+    #TODO how to to display just the logged in user's events?
 
 # def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
 #     event = Event.objects.get(id=event_id) #DetailView automatically retrieves the object based on the primary key provided in the URL pattern. It uses the pk field by default, which should match the primary key of the model. you would need the code on the left if the path was 'events/<int:event_id>/'
@@ -30,11 +34,13 @@ class EventList(ListView):
 #         'event': event
 #     })
 
+@login_required
 class EventDetail(DetailView):
     model = Event
     template_name = 'events/detail.html'
     context_object_name = 'event' #single instance of an object
 
+@login_required
 class EventCreate(LoginRequiredMixin, CreateView):
     model = Event
     fields = ['name', 'short_summary','category', 'date', 'time', 'location', 'about', 'age_restriction']
@@ -43,11 +49,26 @@ class EventCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
+@login_required   
 class EventUpdate(UpdateView):
     model = Event
     fields = ['name', 'short_summary','category', 'date', 'time', 'location', 'about', 'age_restriction']
-
+    
+@login_required
 class EventDelete(DeleteView):
     model = Event
     success_url = '/events'
 
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

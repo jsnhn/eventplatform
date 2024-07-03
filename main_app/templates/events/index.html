@@ -3,6 +3,16 @@
 
 <h1>Events</h1>
 
+<form method="GET">
+  <label for="filter">Filter Events:</label>
+  <select name="filter" id="filter">
+    <option value="all" >All Events</option>
+    <option value="created" >Created Events</option>
+    <option value="attending">Attending Events</option>
+  </select>
+</form>
+
+
 {% for event in events %}
   <div class="index-card">
     <a href="{% url 'detail' event.id %}">

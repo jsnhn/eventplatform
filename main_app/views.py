@@ -50,3 +50,4 @@ class EventUpdate(UpdateView):
 class EventDelete(DeleteView):
     model = Event
     success_url = '/events'
+

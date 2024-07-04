@@ -13,23 +13,25 @@
   <header>
     <nav>
       <ul class="nav-ul">
-        <li class="nav-logo"><a href="/">Event Platform</a></li>
-        <li><a href="{% url 'about' %}" class="active">About</a></li>
+          <li class="nav-logo"><a href="/">Event Platform</a></li>
+          <li><a href="{% url 'about' %}" class="active">About</a></li>
           {% if user.is_authenticated %}
-          <li><a href="{% url 'events_create' %}">Add Event</a></li>
-            <li><a href="{% url 'index' %}">My Events</a></li>
+              {% if request.path != '/events/' %} <!-- checks if the current request's URL path (request.path) is not equal to (!=) the string '/events/'.-->
+                  <li><a href="{% url 'events_create' %}">Add Event</a></li>
+                  <li><a href="{% url 'index' %}">My Events</a></li>
+              {% endif %}
               <li>
-                <form action="{% url 'logout' %}" method="post" class="inline-form">
-                  {% csrf_token %}
-                  <button type="submit">Log Out</button>
-                </form>
+                  <form action="{% url 'logout' %}" method="post" class="inline-form">
+                      {% csrf_token %}
+                      <button type="submit">Log Out</button>
+                  </form>
               </li>
-            {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+          {% else %}
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+              <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
+      </ul>
+  </nav>
   </header>
   <main class="container">
     {% block content %}

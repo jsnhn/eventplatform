@@ -35,9 +35,8 @@ class EventList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         filter = self.request.GET.get('filter', None)
         print(filter)
-
         if filter == 'created':
-            return Event.objects.filter(user=self.request.user)
+            return Event.objects.filter(user=self.request.user)# This is the currently authenticated user making the request.
         elif filter == 'attending':
             return None
         else:

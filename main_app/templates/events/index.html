@@ -4,7 +4,6 @@
 <div class="vert-nav">
   <ul class="vert-ul">
     {% if user.is_authenticated %}
-    <li class="vert-li"><a href="{% url 'events_create' %}">Add Event</a></li>
     <li class="vert-li"><a href="{% url 'index' %}">My Events</a></li>
     <li class="vert-li"><a href="">My Tickets</a></li>
     {% endif %}
@@ -23,6 +22,7 @@
     <a href="{% url 'index' %}">All Events</a>
     <a href="{% url 'index' %}?filter=created">Created Events</a>
     <a href="{% url 'index' %}?filter=attending">Attending Events</a>
+    <div class="index-create"><a href="{% url 'events_create' %}">Add Event</a></div>
 
     {% for event in events %}
       <div class="index-card">

@@ -191,7 +191,11 @@ nav {
   to { opacity: 1; }
 }
 
-
 img {
   height: 400px;
+}
+
+.index-create {
+  display: inline;
+  float: right;
 }

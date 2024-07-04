@@ -35,10 +35,20 @@ class EventList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         filter = self.request.GET.get('filter', None)
         print(filter)
+
+        if filter == 'created':
+            return Event.objects.filter(user=self.request.user)
+        elif filter == 'attending':
+            return None
+        else:
+            return Event.objects.all()
+
+
+            
         # if filter = created events, return all the events the user created
         # if filter = attending, return all the events the user is attending
         # else if there is no filter, return all the events.
-        return Event.objects.all()
+        
 
 # def events_detail(request, event_id): #'events/<int:event_id>/' this determined the parameter name for event_id
 #     event = Event.objects.get(id=event_id) #DetailView automatically retrieves the object based on the primary key provided in the URL pattern. It uses the pk field by default, which should match the primary key of the model. you would need the code on the left if the path was 'events/<int:event_id>/'
@@ -74,7 +84,6 @@ class EventCreate(LoginRequiredMixin, CreateView):
             except Exception as e:
                 print('An error occurred uploading file to S3')
                 print(e)
-        
         # this is where you will create a new photo and associated with the event. 
         return HttpResponseRedirect(self.get_success_url())
     

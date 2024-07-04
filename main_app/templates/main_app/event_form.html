@@ -8,6 +8,15 @@
         <table>
             {{ form.as_table }}
         </table>
+        <tr>
+            <th>
+                <label for="id_photo-file">Upload Photo</label>
+            </th>
+            <td>
+                <input type="file" name="photo-file">
+            </td>
+        </tr>
+    </table>
         <input type="submit" value="Submit!" class="btn">
     </form>
 {% else %}

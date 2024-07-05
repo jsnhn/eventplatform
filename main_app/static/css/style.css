@@ -199,3 +199,10 @@ img {
   display: inline;
   float: right;
 }
+
+.img-detail {
+  position: absolute; /* position an element precisely within its containing element. */
+  top: 15%;
+  right: 53px;
+}
+

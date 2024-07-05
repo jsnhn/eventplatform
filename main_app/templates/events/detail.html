@@ -23,9 +23,9 @@
             <p>Category: {{ event.get_category_display }}</p> 
             <p>Age: {{ event.age_restriction }}</p>
         {% for photo in event.photo_set.all %}
-            <img class="responsive-img card-panel" src="{{photo.url}}">
+            <img class="img-detail" src="{{photo.url}}">
         {% empty %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            <div>No Photos Uploaded</div>
         {% endfor %}
         </div>
         <div>

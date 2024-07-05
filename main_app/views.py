@@ -90,6 +90,25 @@ class EventUpdate(LoginRequiredMixin, UpdateView):
     model = Event
     fields = ['name', 'short_summary','category', 'date', 'time', 'location', 'about', 'age_restriction']
     
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        self.object = form.save() 
+        print(self.request.FILES)
+
+        photo_file = self.request.FILES.get('photo-file', None)
+        if photo_file:
+            s3 = boto3.client('s3')
+            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+            try:
+                bucket = os.environ['S3_BUCKET']
+                s3.upload_fileobj(photo_file, bucket, key)
+                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+                Photo.objects.create(url=url, event_id=self.object.id)
+            except Exception as e:
+                print('An error occurred uploading file to S3')
+                print(e)
+        # this is where you will create a new photo and associated with the event. 
+        return HttpResponseRedirect(self.get_success_url())
 
 class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event

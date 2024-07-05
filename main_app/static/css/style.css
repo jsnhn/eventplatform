@@ -87,9 +87,19 @@ nav {
   color: white;
 }
 
-.content-area {
+.content-area-detail {
   flex-grow: 1;
   padding: 20px;
+  box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
+  background-color: rgba(91, 168, 164, 0.3);
+  max-width: 483px;
+  max-height: 450px;
+  margin-top: 19px;
+}
+.content-area-index {
+  flex-grow: 1;
+  padding: 20px;
+  box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
 }
 
 .index-card {
@@ -204,6 +214,7 @@ img {
   position: absolute; /* position an element precisely within its containing element. */
   top: 15%;
   right: 53px;
+  box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
 }
 
 .icon-container {

@@ -30,7 +30,6 @@ class EventList(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'events/index.html' #file location
     context_object_name = 'events' # specify the name of the context variable that will be used in the template
-    #TODO how to to display just the logged in user's events?
 
     def get_queryset(self):
         filter = self.request.GET.get('filter', None)
@@ -40,7 +39,7 @@ class EventList(LoginRequiredMixin, ListView):
         elif filter == 'attending':
             return None
         else:
-            return Event.objects.all()
+            return Event.objects.filter(user=self.request.user) #to display just the logged in user's events?
 
 
             

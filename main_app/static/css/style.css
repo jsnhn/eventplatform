@@ -36,6 +36,7 @@ nav {
 .nav-ul li a {
   display: block;
   color: rgba(75, 127, 134);
+  font-weight: bold;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -52,6 +53,7 @@ nav {
   border: none;
   background: none;
   color: rgba(75, 127, 134);
+  font-weight: bold;
   cursor: pointer;
   padding: 14px 16px;
   text-align: center;
@@ -96,10 +98,10 @@ nav {
   max-height: 450px;
   margin-top: 19px;
 }
+
 .content-area-index {
   flex-grow: 1;
   padding: 20px;
-  box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
 }
 
 .index-card {
@@ -202,7 +204,7 @@ nav {
 }
 
 img {
-  height: 400px;
+  height: 350px;
 }
 
 .index-create {
@@ -227,7 +229,7 @@ img {
 
 .img-detail {
   position: absolute; /* position an element precisely within its containing element. */
-  top: 15%;
+  top: 23%;
   right: 53px;
   box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
 }

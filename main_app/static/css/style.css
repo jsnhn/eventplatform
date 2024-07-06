@@ -104,7 +104,7 @@ nav {
 
 .index-card {
   background-color: rgba(91, 168, 164, 0.3);
-  width: 100%;
+  width: 90%;
   border: 3px solid rgba(26, 36, 41, 0.8);
   padding: 20px;
   margin: 20px 0;
@@ -208,6 +208,21 @@ img {
 .index-create {
   display: inline;
   float: right;
+  margin-right: 85px;
+  background-color: rgba(222, 0, 43, 0.3);
+  border: 2px solid rgba(26, 36, 41, 0.8);
+  padding: 5px;
+}
+
+.index-create:hover {
+  background-color: rgba(222, 0, 43, 0.6);
+  border-color: rgba(222, 0, 43, 0.6);
+}
+
+.index-create a {
+  text-decoration: none;
+  color: rgba(75, 127, 134);
+  font-weight: 40px;
 }
 
 .img-detail {

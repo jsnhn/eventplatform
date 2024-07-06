@@ -237,3 +237,16 @@ img {
   align-self: center;
   margin-top: 20px;
 }
+
+.add-event-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0px 9px 0px rgba(0, 0, 0, .8);
+  background-color: rgba(91, 168, 164, 0.3);
+  max-width: 483px;
+  max-height: 450px;
+  margin: 50px auto;
+}

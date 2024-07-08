@@ -10,27 +10,31 @@
         {% endif %}
     </ul>
 
-    <div class="content-area-detail">
-        <h1>{{ event.name }}</h1>
-        <p class="p-detail">Summary: {{ event.short_summary }}</p>
-        <div>
-            <h3>Date and Time:</h3>
-            <p>{{ event.date }} - {{ event.time }}</p>
-            <h3>Location:</h3>
-            <p>{{ event.location }}</p>
-            <h3>About the Event:</h3>
-            <p>{{ event.about }}</p>
-            <p>Category: {{ event.get_category_display }}</p> 
-            <p>Age: {{ event.age_restriction }}</p>
-        {% for photo in event.photo_set.all %}
-            <img class="img-detail" src="{{photo.url}}">
-        {% empty %}
-            <div>No Photos Uploaded</div>
-        {% endfor %}
+    <div class="flex-container">
+        <div class="content-area-detail">
+            <h1>{{ event.name }}</h1>
+            <p class="p-detail">Summary: {{ event.short_summary }}</p>
+            <div>
+                <h3>Date and Time:</h3>
+                <p>{{ event.date }} - {{ event.time }}</p>
+                <h3>Location:</h3>
+                <p>{{ event.location }}</p>
+                <h3>About the Event:</h3>
+                <p>{{ event.about }}</p>
+                <p>Category: {{ event.get_category_display }}</p> 
+                <p>Age: {{ event.age_restriction }}</p>
+            </div>
+            <div>
+                <a href="{% url 'events_update' event.id %}">Edit</a>
+                <a href="{% url 'events_delete' event.id %}">Delete</a>
+            </div>
         </div>
-        <div>
-            <a href="{% url 'events_update' event.id %}">Edit</a>
-            <a href="{% url 'events_delete' event.id %}">Delete</a>
+        <div class="img-detail-container">
+            {% for photo in event.photo_set.all %}
+                <img class="img-detail" src="{{photo.url}}">
+            {% empty %}
+                <div class="no-photos-text">No Photos Uploaded</div>
+            {% endfor %}
         </div>
     </div>
 </div>
